@@ -1,8 +1,9 @@
 fastapi
 uvicorn
-tensorflow
-numpy
+python-dotenv
 cloudinary
-requests
+tensorflow-cpu
+numpy
+pillow
 python-multipart
-
+requests
