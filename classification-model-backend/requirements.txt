@@ -1,9 +1,8 @@
-fastapi==0.115.0
-uvicorn[standard]==0.32.0
-python-dotenv==1.0.1
-cloudinary==1.42.0
-tensorflow==2.15.0
-pillow==10.4.0
-numpy==1.26.4
-requests==2.32.3
+fastapi
+uvicorn
+tensorflow
+numpy
+cloudinary
+requests
+python-multipart
 
