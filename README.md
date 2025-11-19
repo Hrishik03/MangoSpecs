@@ -1,16 +1,11 @@
-# MangoSpecs 🍋
+# MangoSpecs: Image-Based Mango Variety Classification
 
-**AI Mango Varietal & Quality Grader**
-
-[![Languages](https://img.shields.io/badge/JavaScript-65.1%25-yellow.svg?style=flat&logo=javascript)](#language-composition)
-[![Python](https://img.shields.io/badge/Python-31.4%25-blue.svg?style=flat&logo=python)](#language-composition)
-[![HTML](https://img.shields.io/badge/HTML-2.3%25-orange.svg?style=flat&logo=html5)](#language-composition)
-[![CSS](https://img.shields.io/badge/CSS-1.2%25-264de4.svg?style=flat&logo=css3)](#language-composition)
+MangoSpecs is an end-to-end tool that helps farmers, traders, and researchers understand a mango’s variety and post-harvest quality directly from a photo. Users upload an image through the React frontend, the FastAPI backend stores it temporarily on Cloudinary, and two TensorFlow models classify both cultivar (e.g., Chausa, Dasheri, Kesar, Langra, alphonso, totapuri) and grade (I–III). The goal is to offer a fast, low-friction way to standardize quality checks without laboratory equipment, making large-scale sorting and supply-chain decisions easier.
 
 ---
 
 A **FastAPI + React** application that allows users to upload photos of mangos, stores them temporarily on Cloudinary, and uses two TensorFlow models to:
-- Predict the cultivar (e.g., Chausa, Dasheri, etc.)
+- Predict the cultivar (e.g., Chausa, Dasheri, Kesar, Langra, alphonso, totapuri, etc.)
 - Grade the quality
 
 ---
