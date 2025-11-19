@@ -1,53 +1,102 @@
-Mango App - Variety & Quality Classification
+# MangoSpecs 🍋
 
-FastAPI + React application that lets you upload a mango photo, stores it temporarily on Cloudinary, and runs two TensorFlow models: one predicts the cultivar (Chausa, Dasheri, etc.) and the other grades the fruit (Grade I–III). The frontend provides a guided upload/analyze flow, while the backend exposes `/uploadfile/` and `/analyze` endpoints that orchestrate Cloudinary I/O plus the saved `.h5` models.
+**AI Mango Varietal & Quality Grader**
 
-### Project Layout
-- `classification-model-backend/` – FastAPI service, TensorFlow inference code, and the pretrained `V_2_model.h5` and `V_2_Grading.h5` files.
-- `client/` – React + Vite UI with Tailwind classes, featuring `Upload` and `Display` components that call the backend.
+[![Languages](https://img.shields.io/badge/JavaScript-65.1%25-yellow.svg?style=flat&logo=javascript)](#language-composition)
+[![Python](https://img.shields.io/badge/Python-31.4%25-blue.svg?style=flat&logo=python)](#language-composition)
+[![HTML](https://img.shields.io/badge/HTML-2.3%25-orange.svg?style=flat&logo=html5)](#language-composition)
+[![CSS](https://img.shields.io/badge/CSS-1.2%25-264de4.svg?style=flat&logo=css3)](#language-composition)
 
-### Key Features
-- Direct image upload to Cloudinary with configurable credentials.
-- Species classification across six cultivars plus grading into three quality levels.
-- Clean client workflow: upload → analyze → see results/confidence → reset.
+---
 
-### Prerequisites
-- Python 3.10+ with `pip` and (optionally) `venv`.
-- Node.js 18+ / npm 10+.
-- Cloudinary account (needed for the backend upload step).
+A **FastAPI + React** application that allows users to upload photos of mangos, stores them temporarily on Cloudinary, and uses two TensorFlow models to:
+- Predict the cultivar (e.g., Chausa, Dasheri, etc.)
+- Grade the quality
 
-### Backend Setup (`classification-model-backend`)
-1. `cd classification-model-backend`
-2. (Optional) `python -m venv .venv && .\.venv\Scripts\activate`
-3. `pip install -r requirements.txt`
-4. Create a `.env` in this folder:
-   ```
-   CLOUD_NAME=your_cloud_name
-   CLOUDINARY_API_KEY=your_key
-   CLOUDINARY_API_SECRET=your_secret
-   ```
-5. Start the API: `uvicorn main:app --reload`
-   - Runs on `http://localhost:8000`
-   - Endpoints: `POST /uploadfile/`, `GET /analyze`
+---
 
-> The `.h5` model files are already in this directory; keep them alongside `model.py` and `grading_model.py`, or update the load paths if you relocate them.
+## 🗂 Project Layout
 
-### Frontend Setup (`client`)
-1. `cd client`
-2. `npm install`
-3. `npm run dev`
-   - Vite dev server defaults to `http://localhost:5173`
-   - The UI expects the backend at `http://localhost:8000`; if you change the API base URL, update it inside `client/src/component/Upload.jsx` and `Display.jsx`.
+- `classification-model-backend/` — FastAPI service and TensorFlow inference code; houses the model files.
+- `client/` — React + Vite frontend UI with Tailwind CSS.
 
-### Running Everything Locally
-1. Launch the backend server first so it can accept uploads.
-2. Start the Vite dev server.
-3. Open the client URL, drop a JPG/PNG mango photo, click **Upload**, then **Get Result** after the upload succeeds.
-4. Use **Reset** to analyze another image.
+---
 
-### Deployment Notes
-- Keep the Cloudinary credentials in environment variables wherever you deploy (GitHub secrets, hosting dashboard, etc.).
-- Because model files are ~56 MB combined, ensure your hosting provider supports large static assets or mount persistent storage.
-- If exposing the API publicly, restrict `allow_origins` in the FastAPI CORS middleware instead of the current `"*"`.
+## 🚀 Running This Project Locally
 
-The project is already pushed to GitHub; update this README as the API base URL, model paths, or UI evolve.
+You’ll need **Python (3.10+)**, **Node.js (18+)**, **npm (10+)**, and a **Cloudinary account**.
+
+### 1. Clone the Repository
+
+```sh
+git clone https://github.com/Hrishik03/MangoSpecs.git
+cd MangoSpecs
+```
+
+---
+
+### 2. Backend Setup (`classification-model-backend`)
+
+```sh
+cd classification-model-backend
+python -m venv .venv
+# Activate venv:
+source .venv/bin/activate    # On Mac/Linux
+# OR
+.venv\Scripts\activate       # On Windows
+
+pip install -r requirements.txt
+```
+
+Create a file named `.env` in this folder with your Cloudinary credentials:
+
+```
+CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+```
+
+Start the API server:
+```sh
+uvicorn main:app --reload
+```
+- API runs at: [http://localhost:8000](http://localhost:8000)
+- Key endpoints: `POST /uploadfile/`, `GET /analyze`
+
+**Note:** The `.h5` model files must be in this directory alongside `model.py` and `grading_model.py`.
+
+---
+
+### 3. Frontend Setup (`client`)
+
+Open a **new terminal**, then:
+
+```sh
+cd client
+npm install
+npm run dev
+```
+- The web UI will open at: [http://localhost:5173](http://localhost:5173)
+- It expects the backend at: `http://localhost:8000` (can be changed in `client/src/components/Upload.jsx` & `Display.jsx`)
+
+---
+
+### 4. Using MangoSpecs
+
+1. Launch the backend server first.
+2. Start the frontend (Vite dev server).
+3. Open [http://localhost:5173](http://localhost:5173) in your browser.
+4. Drop a JPG/PNG mango photo, **Upload**, then **Get Result** after the upload succeeds.
+5. Use **Reset** to analyze another image.
+
+---
+
+## 🌐 Deployment Notes
+
+- Keep your Cloudinary credentials secure (use secrets/environment variables).
+- Model files are ~56 MB combined; hosting must support large static assets or persistent storage.
+- If exposing the API publicly, restrict `allow_origins` in the FastAPI CORS middleware (don’t use `*`).
+
+---
+
+> Update this README as necessary if the API base URL, model paths, or UI details change.
